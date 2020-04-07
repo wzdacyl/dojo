@@ -30,3 +30,6 @@ dojo learn 2020-02
 #### 7. lambda/stream
 * dojo.forEach
 * dojo.filter
+
+
+#### 8. module
