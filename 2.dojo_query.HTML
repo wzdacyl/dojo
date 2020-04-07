@@ -1,0 +1,51 @@
+<!-- 
+dojo.query()
+dojo.byId()
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Test Edit</title>
+    <script src="../dojo/dojo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	dojo.addOnLoad(function() { 
+    		console.debug('td amount : ', dojo.query("td").length);
+    		console.debug('e2 amount dojo query : ', dojo.query("#e2").length);
+    		console.debug('e start amount : ', dojo.query("[id^=e]").length);
+    		 
+			dojo.connect(dojo.byId("e2"), "onclick", this, function(event){
+				   // the var 'event' is available, and is the normalized object
+				   console.debug("dojo by id e2", dojo.byId("e2").innerHTML, " id is ", dojo.byId("e2").id);
+			});
+    		 /**
+    		 dojo.query("[id^=e]").onclick(function(e){
+    		 	alert("e element is clicked");
+    		 });
+    		 */
+    	});
+
+    </script>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<th>msu</th>
+				<th>comment</th>
+				<th>edit</th>
+			</tr>
+			<tr>
+				<td>234</td>
+				<td>adf sdfads</td>
+				<td name="edit_3ew24" id="e1" class="tb-row"><label>Edit</label></td>
+			</tr>
+			<tr>
+				<td>244</td>
+				<td>asdfas</td>
+				<td name="edit_fewc2" id="e2" class="tb-row"><label>Edit</label></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
+

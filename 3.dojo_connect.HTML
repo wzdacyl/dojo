@@ -1,0 +1,65 @@
+<!-- 
+dojo.connect()
+dojo.xhrGet()
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Test Edit</title>
+    <script src="../dojo/dojo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+		dojo.ready(function(){
+    		console.debug('td amount : ', dojo.query("td").length);
+    		console.debug('e2 amount dojo query : ', dojo.query("#e2").length);
+    		console.debug('e start amount : ', dojo.query("[id^=e]").length);
+    		 
+    		dojo.query("[id^=edit_]").forEach(function(node, index, arr){
+    			dojo.connect(node, "onclick", function(){
+    				var machine_id = node.parentNode.getAttribute("id").split("_")[1];
+    				alert("e element is clicked " + node.parentNode.getAttribute("id"));
+    				var xhrArgs = {
+						url: "http://localhost:8999/user/"+machine_id,
+						headers: { "Content-Type": "application/json; charset=UTF-8"},
+						handleAs : "json",
+						handle: function(data) {
+		    				dojo.byId("name_" + machine_id).innerHTML = data.name;
+		    				dojo.byId("age_" + machine_id).innerHTML = data.age;
+						}
+    				};
+    				var deferred = dojo.xhrGet(xhrArgs);
+    			})
+    		});
+    	});
+    </script>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<th>msu</th>
+				<th>comment</th>
+				<th>name</th>
+				<th>age</th>
+				<th>edit</th>
+			</tr>
+			<tr id="machine_5e506fe08accf91d2f283f19">
+				<td>234</td>
+				<td>adf sdfads</td>
+				<td id="name_5e506fe08accf91d2f283f19"></td>
+				<td id="age_5e506fe08accf91d2f283f19"></td>
+				<td id="edit_5e506fe08accf91d2f283f19" id="e1" class="tb-row" style="color:blue" ><label>Edit</label></td>
+				<td id="correctedTime_5e506fe08accf91d2f283f19"></td>
+			</tr>
+			<tr id="machine_5e509406f00d4a3868ce3b11">
+				<td>244</td>
+				<td>asdfas</td>
+				<td id="name_5e509406f00d4a3868ce3b11"></td>
+				<td id="age_5e509406f00d4a3868ce3b11"></td>
+				<td id="edit_5e509406f00d4a3868ce3b11" id="e2" class="tb-row" style="color:blue" ><label>Edit</label></td>
+				<td id="correctedTime_5e509406f00d4a3868ce3b11"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<!-- 
+dojo.forEach
+dojo.filter
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dojo learn</title>
+</head>
+<body>
+	<script src="./dojo.js"></script>
+	<script>
+		var myObj = { name : "菜鸟教程", site : "www.runoob.com" };
+		console.info(myObj);
+		
+		dojo.ready(
+			function(){
+				//query
+				dojo.query("#list li").forEach(function(item) {
+					console.info(item.innerHTML);
+				});
+				
+				//forEach
+				var output = (item, index) => {
+					console.log("index : " + (index + 1) + ". "+ item);
+				};
+				var list = ['My','name','is','Joe'];
+				dojo.forEach(list, output);
+				
+				//filter
+				var output2 = (item) => {
+					return item.length > 2;
+				};
+				var filteredList = dojo.filter(list, output2);
+				dojo.forEach(filteredList, output);
+				
+				dojo.forEach(dojo.filter(list, output2), output);
+			}
+		);
+
+	</script>
+	hello dojo
+	<div>
+		<ol id="list">
+			<li>AAA</li>
+			<li>BBB</li>
+			<li>CCC</li>
+			<li>DDD</li>
+			<li>EEE</li>
+			<li>FFF</li>
+		</ol>
+	</div>
+</body>
+</html>

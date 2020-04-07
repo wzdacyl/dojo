@@ -1,0 +1,259 @@
+<!-- 
+json handle
+dojo.toJson()
+Number();
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Test Edit</title>
+</head>
+<body>
+	<div class="ibm-fluid">
+		<div class="ibm-col-1-1">
+			<ibmweb:Message severity="error" label="ERROR">
+				<strong>eee</strong>
+			</ibmweb:Message>
+			<br />
+		</div>
+	</div>
+	<table>
+		<tbody>
+			<tr>
+				<th>msu</th>
+				<th>comment</th>
+				<th>name</th>
+				<th>age</th>
+				<th>edit</th>
+				<th>Corrected Time</th>
+			</tr>
+			<tr id="machine_5e506fe08accf91d2f283f19">
+				<td>234</td>
+				<td>adf sdfads</td>
+				<td id="name_5e506fe08accf91d2f283f19"></td>
+				<td id="comment_5e506fe08accf91d2f283f19"></td>
+				<td id="edit_5e506fe08accf91d2f283f19" id="e1" class="tb-row" style="color:blue" ><label>Edit</label></td>
+				<td id="correctedTime_5e506fe08accf91d2f283f19"></td>
+			</tr>
+			<tr id="machine_5e509406f00d4a3868ce3b11">
+				<td>244</td>
+				<td>asdfas</td>
+				<td id="name_5e509406f00d4a3868ce3b11"></td>
+				<td id="comment_5e509406f00d4a3868ce3b11"></td>
+				<td id="edit_5e509406f00d4a3868ce3b11" id="e2" class="tb-row" style="color:blue" ><label>Edit</label></td>
+				<td id="correctedTime_5e509406f00d4a3868ce3b11"></td>
+			</tr>
+		</tbody>
+	</table>
+
+    <script src="../dojo/dojo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	var editable = Number(1);
+
+
+    	import { firstName, lastName, year } from './module1.js';
+    	console.info("module1 imported firstName : ",firstName);
+
+		//https://blog.csdn.net/xiaxiaoxian/article/details/79621825
+	    class Parent{ //定义一个类
+	        constructor(name='lllleoooo'){
+	          this.name= name;
+	        }
+
+	        get longName(){ // 属性
+	          return 'mk' + this.name;
+	        }
+	 
+	        set longName(value){
+	          this.name = value;
+			}
+
+			print(a) {
+				return "hello"+ a + " this class name is : "+ this.name;
+			}
+ 
+		    static tell(){ // 静态方法:通过类去调用，而不是实例
+		      console.log('tell')
+		    }
+
+	    }
+
+ 		Parent.type = 'test'; // 定义静态属性
+        console.log('static variable: ',Parent.type) // 静态属性 test
+
+	    let g_parent = new Parent();
+    	console.log(g_parent);
+    	g_parent.longName = "FFFName";
+    	console.log(g_parent);
+    	console.log("name is ", g_parent.longName);
+    	console.log("toString output -- ", g_parent.print("leo"));
+    	Parent.tell();
+
+    	//继承
+	    class Child extends Parent{
+	      constructor(name = 'child'){ // 子类重写name属性值
+	        super(name); // 子类向父类修改 super一定放第一行
+	        this.type= 'preson';
+	      }
+	    }
+	 
+	    console.log('sub class : ',new Child('hello')) 
+
+
+		function f() { 
+			console.log('I am outside!'); 
+		}
+
+		dojo.ready(function(){
+    		console.info("module1 imported lastname : ",lastName);
+
+			//http://jsrun.pro/tutorial/JZKKp
+			let title = "ES6"
+			let price = 20
+			let publish = "出版社"
+			 
+			let book = {
+			    title,price,publish,
+			    toString() {
+			        console.log(`<<${this.title}>> is ${price}元。`);
+			    }
+			};
+			book['lang'] = "简体中文"
+			console.log(book.price);
+			book.toString();
+
+
+			let [x, y, z] = new Set(['a', 'b', 'c']);
+			console.log('I am x !', x); 
+			console.log('I am y !', y); 
+			console.log('I am z !', z); 
+
+			let [d, [e], g] = [1, [2, 3], 4];
+			console.log('I am d !', d); 
+			console.log('I am e !', e); 
+			console.log('I am g !', g); 
+
+			let [b, c] = [2, 3];
+			console.log('I am b !', b); 
+			console.log('I am c !', c); 
+
+			let [head, ...tail] = [1, 2, 3, 4];
+			console.log('I am head !', head); 
+			console.log('I am tail !', tail); 
+
+			const a = [];
+			a.push('Hello'); // 可执行
+			console.log('I am a hello !', a); 
+			a.length = 0;
+			console.log('I am vacant a!', a); 
+
+
+			if (true) {
+			  const MAX = 5;
+			}
+			//error situation to use const outside: console.log('I am MAX!', MAX); 
+
+			const PI = 3.1415;
+			console.log('I am PI!', PI); 
+			{
+			  let t = f();
+			  t = t * t + 1;
+			  console.log('I am t!', t); 
+			}
+			//do is not supported
+			// let x = do {
+			//   let t = f();
+			//   t * t + 1;
+			// };
+			//console.log('I am do x!', x); 
+
+			let i = "hello";
+			for (let i = 0; i < 10; i++) {
+				console.log("let loop",i);
+			}
+			console.log("let loop",i);
+    		console.log('td amount : ', dojo.query("td").length);
+    		console.log('e2 amount dojo query : ', dojo.query("#e2").length);
+    		console.log('e start amount : ', dojo.query("[id^=e]").length);
+    		console.log('number 88888888: '+toThousands("88888888888"));
+    		if(editable){
+    			console.log('editable in : ', editable);
+	    		dojo.query("[id^=edit_]").forEach(function(node, index, arr){
+	    			dojo.connect(node, "onclick", function(){
+	    				var machine_id = node.parentNode.getAttribute("id").split("_")[1];
+	    				//alert("e element is clicked " + node.parentNode.getAttribute("id"));
+	    				var editNode = dojo.byId("edit_" + machine_id);
+	    				changeMachineTD(editNode, machine_id);
+	    			})
+	    		});
+    		}
+    	});
+
+    	//10
+    	function validation_number(a){
+    		//var pattern = /^\d+$/;
+    		var pattern = /^\d{1,10}$/;
+    		if(!pattern.test(a)) {
+    			'the number ', a, ' is not a number, please enter a number within 10 digit';
+    		}
+    	};
+
+    	function changeMachineTD(node, machine_id) {
+    		var content = node.innerHTML;
+    		var regSave = RegExp(/Save/);
+    		var regEdit = RegExp(/Edit/);
+    		var msuLabel = dojo.byId("name_" + machine_id);
+    		var commentLabel = dojo.byId("comment_" + machine_id);
+    		//var msuValue = msuLabel.innerHTML;
+    		//var commentValue = commentLabel.innerHTML;
+    		if(content.match(regEdit)) {
+    			node.innerHTML = "<label>Save</label>";
+    			msuLabel.innerHTML = "<input id='name_" + machine_id+ "' size='9'></input>";
+    			commentLabel.innerHTML = "<input id='comment_" + machine_id + "' size='9'></input>";
+    		}
+    		else if(content.match(regSave)) {
+    			node.innerHTML = "<label>Edit</label>";
+    			var msu = msuLabel.firstChild.value;
+    			console.log("msu input validation result : ", validation_number(msu))
+    			var comment = commentLabel.firstChild.value;
+    			console.debug("msu: " + msu + "; comment: " + comment)
+    			var xhrArgs = {
+					url: "http://localhost:8999/user/"+machine_id,
+					headers: { "Content-Type": "application/json; charset=UTF-8"},
+					handleAs: "json",
+					postData: requestBody(msu, comment),
+					load: function(data) {
+		    			msuLabel.innerHTML = data.name;
+		    			commentLabel.innerHTML = data.age;
+		    			dojo.byId("correctedTime_" + machine_id).innerHTML = new Date();
+					},
+					error: function(error){
+						alert(error.message);
+						//dojo.query("[label=ERROR]").innerHTML = error.message;
+						dojo.query("[label=ERROR]")[0].innerHTML = error.status + " : "+ error.responseText;
+		    			msuLabel.innerHTML = "";
+		    			commentLabel.innerHTML = "";
+					}
+    			};
+    			var deferred = dojo.xhrPut(xhrArgs);
+
+    		}
+    	};
+    	function requestBody(msu, comment){
+    		return dojo.toJson({name:msu,age:Number(comment)})
+		};
+
+		function toThousands(num) {
+		    var result = [ ], counter = 0;
+		    num = (num || 0).toString().split('');
+		    for (var i = num.length - 1; i >= 0; i--) {
+		        counter++;
+		        result.unshift(num[i]);
+		        if (!(counter % 3) && i != 0) { result.unshift(','); }
+		    }
+		    return result.join('');
+		}
+    </script>
+</body>
+</html>
+

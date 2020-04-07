@@ -1,0 +1,94 @@
+<!-- 
+1. dojo.ready()
+2. dojo.xhr get/put
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="../dojo/dojo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+      function helloWorld(){
+          dojo.xhrGet({
+				url: "http://localhost:8999/user/",
+				handleAs: "json",
+				handle: showUsers,
+　　　　        //load: function(data){
+				//console.info(data);
+				//返回成功处理
+			   //},//成功后回调函数
+　　　　        error:function(error,ioArgs){alert(error.message);}//出错时回调函数
+　　        });
+       };
+
+	function showUsers(data){
+            var table = "<table border=\"1\">";
+            table += "<tr><th>User_ID</th><th>User_Name</th><th>User_Age</th></tr>";
+            dojo.forEach(data, function(user) {
+                table += "<tr><td>";
+                table += user.id;
+                table += "</td><td>";
+                table += user.name;
+                table += "</td><td>";
+                table += user.age;
+                table += "</td></tr>";
+            });
+            table += "</table>";
+            dojo.place(table, dojo.body());
+	}
+
+      function helloWorld2(){
+		dojo.xhrPut({
+				//url: "http://localhost:8080/user",
+				url: "http://localhost:8999/user/5e506fe08accf91d2f283f19",
+				headers: { "Content-Type": "application/json; charset=UTF-8"},
+				//content:{
+				//		name:"user1",
+				//		age:25
+				//},
+				content : requestBody(),
+				//postData: dojo.toJson({name:"user1",age:31}),
+				handleAs : "json",
+				//load:function(data){
+				//	console.info(data);
+				//}
+				handle: showUsers2
+			});
+		};
+
+		/**
+		 * json的方式不能工作；但是WebSphere里面的Struts2(json方式可以)
+ 		 */
+	function requestBody() {
+		var request = {};
+		request.name = "user1";
+		request.age = 25;
+		console.log('request: ',request);
+		return request;
+	};
+
+	function showUsers2(data){
+		console.log(data)
+            var table = "<table border=\"1\">";
+            table += "<tr><th>User_ID</th><th>User_Name</th><th>User_Age</th></tr>";
+            table += "<tr><td>";
+            table += data.id;
+            table += "</td><td>";
+            table += data.name;
+            table += "</td><td>";
+            table += data.age;
+            table += "</td></tr>";
+            table += "</table>";
+            dojo.place(table, dojo.body());
+	}
+
+       //绑定页面加载完成后的初始化函数
+       dojo.ready(helloWorld);
+       dojo.ready(helloWorld2);
+    </script>
+</head>
+<body>
+   
+</body>
+</html>

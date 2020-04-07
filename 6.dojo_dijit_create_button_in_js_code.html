@@ -1,0 +1,32 @@
+<!-- dijit.layout
+  parseOnLoad
+  dijit.form.Button;
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="js/dijit/themes/claro/claro.css">
+    <script type="text/javascript" src="js/dojo/dojo.js" djConfig="parseOnLoad:true"></script>
+    <title></title>
+    <script type="text/javascript">
+
+    dojo.require("dojo.domReady!");
+    dojo.require("dijit.form.Button");
+        require(["dijit/form/Button", "dojo/domReady!"], function (Button) {
+            var button = new Button({
+                label: "Click Me!", 
+                onClick: function () {
+                    console.log("First button was clicked!");
+                }
+            }, "btn");
+            button.startup();
+        });
+    </script>
+</head>
+<body class="claro">
+<button id="btn">
+    Click Me!
+</button>
+</body>
+</html>
